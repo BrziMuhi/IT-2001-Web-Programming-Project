@@ -15,9 +15,9 @@ app.route({
    }
 });
 app.route({ view : "about", load : "about.html" });
-app.route({ view : "destinations", load : "destinations.html" });
+app.route({ view : "services", load : "services.html" });
 app.route({ view : "call-to-action", load : "call-to-action.html" });   
-app.route({ view : "portfolio", load : "gallery.html" }); 
+app.route({ view : "portfolio", load : "portfolio.html" }); 
 app.route({ view : "team", load : "team.html" });
 app.route({ view : "pricing", load : "pricing.html" });  
 app.route({ view : "faq", load : "faq.html" });
