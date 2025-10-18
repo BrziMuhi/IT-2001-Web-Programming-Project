@@ -14,6 +14,7 @@ app.route({
     console.log("Hero section ready Cevapppii");
    }
 });
+app.route({ view : "login", load : "login.html" });
 app.route({ view : "about", load : "about.html" });
 app.route({ view : "services", load : "services.html" });
 app.route({ view : "call-to-action", load : "call-to-action.html" });   
