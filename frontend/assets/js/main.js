@@ -16,8 +16,7 @@ app.route({
 });
 app.route({ view : "login", load : "login.html" });
 app.route({ view : "about", load : "about.html" });
-app.route({ view : "services", load : "services.html" });
-app.route({ view : "call-to-action", load : "call-to-action.html" });   
+app.route({ view : "services", load : "services.html" }); 
 app.route({ view : "portfolio", load : "portfolio.html" }); 
 app.route({ view : "team", load : "team.html" });
 app.route({ view : "pricing", load : "pricing.html" });  
@@ -29,14 +28,18 @@ app.run();
 
 
 
+//For removing padding on hero and login sections
+
 //  When the hash changes
 window.addEventListener("hashchange", function() {
   const sections = document.querySelectorAll("section");
-  if (window.location.hash === "#hero") {
-    sections.forEach(sec => sec.style.padding = "0");
-  } else {
-    sections.forEach(sec => sec.style.padding = "60px 0");
-  }
+  sections.forEach(sec => {
+    if (sec.id === "hero" || sec.id === "login") {
+      sec.style.padding = "0";
+    } else {
+      sec.style.padding = "60px 0";
+    }
+  });
 });
 
 // When the page loads
@@ -151,8 +154,22 @@ window.addEventListener("load", function() {
    * Initiate glightbox
    */
   const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+  selector: '.glightbox',
+  touchNavigation: true,
+  loop: true,
+  closeButton: true,
+  openEffect: 'fade',
+  closeEffect: 'fade',
+  plyr: {
+    css: 'https://cdn.plyr.io/3.6.8/plyr.css', // opciono ako budeš imao video
+    js: 'https://cdn.plyr.io/3.6.8/plyr.js'
+  },
+  svg: {
+    close: '<i class="bi bi-x-lg"></i>', // koristi Bootstrap “X” ikonu
+    next: '<i class="bi bi-chevron-right"></i>',
+    prev: '<i class="bi bi-chevron-left"></i>'
+  }
+});
 
   /**
    * Init isotope layout and filters
