@@ -27,6 +27,29 @@ app.route({ view : "contact", load : "contact.html" });
 
 app.run();
 
+
+
+//  When the hash changes
+window.addEventListener("hashchange", function() {
+  const sections = document.querySelectorAll("section");
+  if (window.location.hash === "#hero") {
+    sections.forEach(sec => sec.style.padding = "0");
+  } else {
+    sections.forEach(sec => sec.style.padding = "60px 0");
+  }
+});
+
+// When the page loads
+window.addEventListener("load", function() {
+  const sections = document.querySelectorAll("section");
+  if (window.location.hash === "#hero" || window.location.hash === "") {
+    sections.forEach(sec => sec.style.padding = "0");
+  } else {
+    sections.forEach(sec => sec.style.padding = "60px 0");
+  }
+});
+
+
 (function() {
   "use strict";
 
