@@ -1,14 +1,9 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "eda44f6ae43c76d8caf02af35ddb2680",
     "packages": [
         {
             "name": "flightphp/core",
             "version": "v3.17.2",
+            "version_normalized": "3.17.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flightphp/core.git",
@@ -45,7 +40,9 @@
                 "phpstan/phpstan": "PHP Static Analyzer",
                 "tracy/tracy": "Tracy debugger"
             },
+            "time": "2025-10-03T21:05:48+00:00",
             "type": "library",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "flight/autoload.php"
@@ -80,16 +77,9 @@
                 "issues": "https://github.com/flightphp/core/issues",
                 "source": "https://github.com/flightphp/core/tree/v3.17.2"
             },
-            "time": "2025-10-03T21:05:48+00:00"
+            "install-path": "../flightphp/core"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "dev": true,
+    "dev-package-names": []
 }
