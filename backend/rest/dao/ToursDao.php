@@ -25,3 +25,5 @@ class ToursDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+?>

@@ -18,3 +18,5 @@ class PackagesDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+?>

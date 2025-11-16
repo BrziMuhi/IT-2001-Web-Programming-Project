@@ -18,3 +18,5 @@ require_once __DIR__ . '/routes/contacts.php';
 require_once __DIR__ . '/routes/gallery.php';
 
 Flight::start();
+
+?>

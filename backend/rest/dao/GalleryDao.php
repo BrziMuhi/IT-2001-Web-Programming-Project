@@ -18,3 +18,5 @@ class GalleryDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+?>

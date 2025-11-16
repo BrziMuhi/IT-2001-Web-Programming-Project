@@ -42,3 +42,5 @@ Flight::route('DELETE /guides/@id', function ($id) {
     $success = $service->delete($id);
     Flight::json(['deleted' => $success]);
 });
+
+?>

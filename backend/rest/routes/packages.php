@@ -60,3 +60,5 @@ Flight::route('DELETE /packages/@id', function ($id) {
         Flight::halt(404, 'Package not found');
     }
 });
+
+?>

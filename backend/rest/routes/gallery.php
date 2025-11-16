@@ -26,3 +26,5 @@ Flight::route('GET /tours/@id/gallery', function ($tour_id) {
     $service = Flight::get('gallery_service');
     Flight::json($service->get_by_tour((int)$tour_id));
 });
+
+?>

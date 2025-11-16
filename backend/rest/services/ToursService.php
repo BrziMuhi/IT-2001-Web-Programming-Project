@@ -15,3 +15,5 @@ class ToursService extends BaseService
         return $this->dao->get_active();
     }
 }
+
+?>

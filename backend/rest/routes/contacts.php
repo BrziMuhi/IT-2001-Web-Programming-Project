@@ -29,3 +29,5 @@ Flight::route('POST /contacts', function () {
     $created = $service->add($data);
     Flight::json($created, 201);
 });
+
+?>

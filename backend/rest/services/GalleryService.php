@@ -16,3 +16,5 @@ class GalleryService extends BaseService
         return array_values(array_filter($all, fn($g) => (int)$g['tour_id'] == $tour_id));
     }
 }
+
+?>

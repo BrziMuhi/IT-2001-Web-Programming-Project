@@ -20,3 +20,5 @@ class GuidesDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+?>

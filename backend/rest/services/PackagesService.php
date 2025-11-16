@@ -15,3 +15,5 @@ class PackagesService extends BaseService
         return $this->dao->get_active();
     }
 }
+
+?>

@@ -57,3 +57,5 @@ Flight::route('DELETE /tours/@id', function ($id) {
         Flight::halt(404, 'Tour not found');
     }
 });
+
+?>

@@ -53,3 +53,27 @@ Flight::route('DELETE /users/@id', function ($id) {
         Flight::halt(404, 'User not found');
     }
 });
+
+
+
+
+
+Flight::route('POST /login', function() {
+    $data = Flight::request()->data->getData();
+
+    $service = Flight::get('users_service');
+
+    try {
+        $user = $service->login($data['email'], $data['password']);
+
+        Flight::json([
+            'message' => 'User logged in successfully',
+            'data' => $user
+        ]);
+    } catch (Exception $e) {
+        Flight::halt(401, 'Invalid email or password');
+    }
+});
+
+
+?>

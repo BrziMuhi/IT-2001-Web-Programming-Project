@@ -31,3 +31,5 @@ class BookingsDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+?>

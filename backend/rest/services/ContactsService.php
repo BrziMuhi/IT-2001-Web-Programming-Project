@@ -10,3 +10,5 @@ class ContactsService extends BaseService
         parent::__construct(new ContactsDao());
     }
 }
+
+?>

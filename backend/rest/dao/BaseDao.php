@@ -69,3 +69,5 @@ class BaseDao
         return $stmt->execute(['id' => $id]);
     }
 }
+
+?>

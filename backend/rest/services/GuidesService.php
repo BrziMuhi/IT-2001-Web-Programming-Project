@@ -10,3 +10,5 @@ class GuidesService extends BaseService
         parent::__construct(new GuidesDao());
     }
 }
+
+?>

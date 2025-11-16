@@ -1,19 +1,23 @@
 <?php
-
 require_once __DIR__ . '/BaseDao.php';
 
-class UsersDao extends BaseDao
-{
+class UsersDao extends BaseDao {
+
+    protected $table_name;
+
     public function __construct()
     {
-        parent::__construct('users');
+        $this->table_name = "users";
+        parent::__construct($this->table_name);
     }
 
-    public function get_by_email(string $email): ?array
+    public function get_by_email($email)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-        $row = $stmt->fetch();
-        return $row === false ? null : $row;
+        $stmt = $this->conn->prepare("SELECT * FROM {$this->table_name} WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }
+
+?>

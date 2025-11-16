@@ -64,3 +64,5 @@ Flight::route('DELETE /bookings/@id', function ($id) {
         Flight::halt(404, 'Booking not found');
     }
 });
+
+?>

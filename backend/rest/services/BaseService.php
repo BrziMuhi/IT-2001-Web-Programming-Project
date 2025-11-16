@@ -33,3 +33,5 @@ class BaseService {
         return $this->dao->delete($id);
     }
 }
+
+?>

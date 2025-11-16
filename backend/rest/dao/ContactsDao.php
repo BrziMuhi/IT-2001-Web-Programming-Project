@@ -18,3 +18,6 @@ class ContactsDao extends BaseDao
         return $stmt->fetchAll();
     }
 }
+
+
+?>

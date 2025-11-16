@@ -20,3 +20,5 @@ class BookingsService extends BaseService
         return $this->dao->get_by_tour($tour_id);
     }
 }
+
+?>
