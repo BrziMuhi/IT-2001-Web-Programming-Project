@@ -2,16 +2,37 @@
 
 require_once __DIR__ . '/../services/GalleryService.php';
 
-Flight::set('gallery_service', new GalleryService());
+Flight::set('galleryService', new GalleryService());
 
+/**
+ * @OA\Get(
+ *     path="/gallery",
+ *     tags={"gallery"},
+ *     summary="Get all gallery items",
+ *     @OA\Response(response=200, description="OK")
+ * )
+ */
 Flight::route('GET /gallery', function () {
-    $service = Flight::get('gallery_service');
+    $service = Flight::get('galleryService');
     Flight::json($service->get_all());
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/gallery/{id}",
+ *     tags={"gallery"},
+ *     summary="Get gallery item by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(response=200, description="OK")
+ * )
+ */
 Flight::route('GET /gallery/@id', function ($id) {
-    $service = Flight::get('gallery_service');
+    $service = Flight::get('galleryService');
     $item = $service->get_by_id((int)$id);
 
     if ($item) {
@@ -21,10 +42,23 @@ Flight::route('GET /gallery/@id', function ($id) {
     }
 });
 
-
-Flight::route('GET /tours/@id/gallery', function ($tour_id) {
-    $service = Flight::get('gallery_service');
-    Flight::json($service->get_by_tour((int)$tour_id));
+/**
+ * @OA\Get(
+ *     path="/tours/{id}/gallery",
+ *     tags={"gallery"},
+ *     summary="Get gallery items for a tour",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(response=200, description="OK")
+ * )
+ */
+Flight::route('GET /tours/@id/gallery', function ($id) {
+    $service = Flight::get('galleryService');
+    Flight::json($service->get_by_tour_id((int)$id));
 });
 
 ?>
