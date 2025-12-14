@@ -13,6 +13,8 @@ Flight::set('contactsService', new ContactsService());
  * )
  */
 Flight::route('GET /contacts', function () {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('contactsService');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /contacts', function () {
  * )
  */
 Flight::route('GET /contacts/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('contactsService');
     $contact = $service->get_by_id((int)$id);
 
@@ -59,9 +63,9 @@ Flight::route('GET /contacts/@id', function ($id) {
  * )
  */
 Flight::route('POST /contacts', function () {
+    require_role('admin');
+
     $service = Flight::get('contactsService');
     $data = Flight::request()->data->getData();
     Flight::json($service->add($data));
 });
-
-?>

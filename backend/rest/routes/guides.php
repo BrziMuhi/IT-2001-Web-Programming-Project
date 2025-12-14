@@ -13,6 +13,8 @@ Flight::set('guidesService', new GuidesService());
  * )
  */
 Flight::route('GET /guides', function () {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('guidesService');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /guides', function () {
  * )
  */
 Flight::route('GET /guides/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('guidesService');
     $guide = $service->get_by_id((int)$id);
 
@@ -59,6 +63,8 @@ Flight::route('GET /guides/@id', function ($id) {
  * )
  */
 Flight::route('POST /guides', function () {
+    require_role('admin');
+
     $service = Flight::get('guidesService');
     $data = Flight::request()->data->getData();
     Flight::json($service->add($data));
@@ -87,6 +93,8 @@ Flight::route('POST /guides', function () {
  * )
  */
 Flight::route('PUT /guides/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('guidesService');
     $data = Flight::request()->data->getData();
     Flight::json($service->update((int)$id, $data));
@@ -107,6 +115,8 @@ Flight::route('PUT /guides/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /guides/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('guidesService');
     $ok = $service->delete((int)$id);
 
@@ -116,5 +126,3 @@ Flight::route('DELETE /guides/@id', function ($id) {
         Flight::halt(404, 'Guide not found');
     }
 });
-
-?>

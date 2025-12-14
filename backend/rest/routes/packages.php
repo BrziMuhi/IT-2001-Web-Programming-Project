@@ -13,6 +13,8 @@ Flight::set('packagesService', new PackagesService());
  * )
  */
 Flight::route('GET /packages', function () {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('packagesService');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /packages', function () {
  * )
  */
 Flight::route('GET /packages/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('packagesService');
     $package = $service->get_by_id((int)$id);
 
@@ -57,6 +61,8 @@ Flight::route('GET /packages/@id', function ($id) {
  * )
  */
 Flight::route('GET /packages/by-tour/@tour_id', function ($tour_id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('packagesService');
     Flight::json($service->get_by_tour_id((int)$tour_id));
 });
@@ -78,6 +84,8 @@ Flight::route('GET /packages/by-tour/@tour_id', function ($tour_id) {
  * )
  */
 Flight::route('POST /packages', function () {
+    require_role('admin');
+
     $service = Flight::get('packagesService');
     $data = Flight::request()->data->getData();
     Flight::json($service->add($data));
@@ -106,6 +114,8 @@ Flight::route('POST /packages', function () {
  * )
  */
 Flight::route('PUT /packages/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('packagesService');
     $data = Flight::request()->data->getData();
     Flight::json($service->update((int)$id, $data));
@@ -126,6 +136,8 @@ Flight::route('PUT /packages/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /packages/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('packagesService');
     $ok = $service->delete((int)$id);
 
@@ -135,5 +147,3 @@ Flight::route('DELETE /packages/@id', function ($id) {
         Flight::halt(404, 'Package not found');
     }
 });
-
-?>

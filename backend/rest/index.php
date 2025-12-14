@@ -3,8 +3,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/config.php';
 
-
-
 // uključi servise
 require_once __DIR__ . '/services/AuthService.php';
 
@@ -16,6 +14,39 @@ Flight::set('flight.log_errors', true);
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+/*
+
+ AUTHORIZATION HELPERS
+
+*/
+function require_role($role) {
+    $user = Flight::get('user');
+
+    if (!$user || !isset($user->role)) {
+        Flight::halt(403, 'Forbidden');
+    }
+
+    if ($user->role !== $role) {
+        Flight::halt(403, 'Access denied');
+    }
+}
+
+function require_roles($roles) {
+    $user = Flight::get('user');
+
+    if (!$user || !isset($user->role)) {
+        Flight::halt(403, 'Forbidden');
+    }
+
+    if (!in_array($user->role, $roles)) {
+        Flight::halt(403, 'Access denied');
+    }
+}
+
+/*
+ AUTHENTICATION MIDDLEWARE
+
+*/
 Flight::route('/*', function () {
 
     // javne rute (bez tokena)
@@ -46,22 +77,22 @@ Flight::route('/*', function () {
 });
 
 /*
-|--------------------------------------------------------------------------
-| TEST ROOT
-|--------------------------------------------------------------------------
+
+ TEST ROOT
+
 */
 Flight::route('GET /', function () {
     echo 'API IS WORKING';
 });
 
 /*
-|--------------------------------------------------------------------------
-| AUTH RUTE
-|--------------------------------------------------------------------------
+
+|AUTH RUTE
+
 */
 require_once __DIR__ . '/routes/AuthRoutes.php';
 
-//rute
+ // rute 
 require_once __DIR__ . '/routes/guides.php';
 require_once __DIR__ . '/routes/tours.php';
 require_once __DIR__ . '/routes/packages.php';

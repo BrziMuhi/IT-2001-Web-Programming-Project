@@ -13,6 +13,8 @@ Flight::set('users_service', new UsersService());
  * )
  */
 Flight::route('GET /users', function () {
+    require_role('admin');
+
     $service = Flight::get('users_service');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /users', function () {
  * )
  */
 Flight::route('GET /users/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('users_service');
     $user = $service->get_by_id((int)$id);
 
@@ -59,6 +63,8 @@ Flight::route('GET /users/@id', function ($id) {
  * )
  */
 Flight::route('POST /users', function () {
+    require_role('admin');
+
     $service = Flight::get('users_service');
     $data = Flight::request()->data->getData();
     Flight::json($service->add($data));
@@ -87,6 +93,8 @@ Flight::route('POST /users', function () {
  * )
  */
 Flight::route('PUT /users/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('users_service');
     $data = Flight::request()->data->getData();
     Flight::json($service->update((int)$id, $data));
@@ -107,6 +115,8 @@ Flight::route('PUT /users/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /users/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('users_service');
     $ok = $service->delete((int)$id);
 
@@ -147,5 +157,3 @@ Flight::route('POST /login', function () {
         Flight::halt(401, 'Invalid email or password');
     }
 });
-
-?>

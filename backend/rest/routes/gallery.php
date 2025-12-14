@@ -13,6 +13,8 @@ Flight::set('galleryService', new GalleryService());
  * )
  */
 Flight::route('GET /gallery', function () {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('galleryService');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /gallery', function () {
  * )
  */
 Flight::route('GET /gallery/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('galleryService');
     $item = $service->get_by_id((int)$id);
 
@@ -57,8 +61,8 @@ Flight::route('GET /gallery/@id', function ($id) {
  * )
  */
 Flight::route('GET /tours/@id/gallery', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('galleryService');
     Flight::json($service->get_by_tour_id((int)$id));
 });
-
-?>

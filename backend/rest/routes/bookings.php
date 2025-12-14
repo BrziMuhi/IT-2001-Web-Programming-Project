@@ -13,6 +13,8 @@ Flight::set('bookings_service', new BookingsService());
  * )
  */
 Flight::route('GET /bookings', function () {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('bookings_service');
     Flight::json($service->get_all());
 });
@@ -32,6 +34,8 @@ Flight::route('GET /bookings', function () {
  * )
  */
 Flight::route('GET /bookings/@id', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('bookings_service');
     $booking = $service->get_by_id((int)$id);
 
@@ -57,6 +61,8 @@ Flight::route('GET /bookings/@id', function ($id) {
  * )
  */
 Flight::route('GET /users/@id/bookings', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('bookings_service');
     Flight::json($service->get_by_user_id((int)$id));
 });
@@ -76,6 +82,8 @@ Flight::route('GET /users/@id/bookings', function ($id) {
  * )
  */
 Flight::route('GET /tours/@id/bookings', function ($id) {
+    require_roles(['admin', 'user']);
+
     $service = Flight::get('bookings_service');
     Flight::json($service->get_by_tour_id((int)$id));
 });
@@ -98,6 +106,8 @@ Flight::route('GET /tours/@id/bookings', function ($id) {
  * )
  */
 Flight::route('POST /bookings', function () {
+    require_role('admin');
+
     $service = Flight::get('bookings_service');
     $data = Flight::request()->data->getData();
     Flight::json($service->add($data));
@@ -127,6 +137,8 @@ Flight::route('POST /bookings', function () {
  * )
  */
 Flight::route('PUT /bookings/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('bookings_service');
     $data = Flight::request()->data->getData();
     Flight::json($service->update((int)$id, $data));
@@ -147,6 +159,8 @@ Flight::route('PUT /bookings/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /bookings/@id', function ($id) {
+    require_role('admin');
+
     $service = Flight::get('bookings_service');
     $ok = $service->delete((int)$id);
 
@@ -156,5 +170,3 @@ Flight::route('DELETE /bookings/@id', function ($id) {
         Flight::halt(404, 'Booking not found');
     }
 });
-
-?>
