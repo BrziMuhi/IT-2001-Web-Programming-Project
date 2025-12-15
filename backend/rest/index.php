@@ -60,11 +60,17 @@ Flight::route('/*', function () {
     }
 
     try {
-        $token = Flight::request()->getHeader('Authentication');
+        $token = Flight::request()->getHeader('Authorization');
+
+        if ($token && stripos($token, 'Bearer ') === 0) {
+            $token = trim(substr($token, 7));
+        }
 
         if (!$token) {
             Flight::halt(401, 'Missing Authentication header');
         }
+
+
 
         $decoded = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
         Flight::set('user', $decoded->user);
